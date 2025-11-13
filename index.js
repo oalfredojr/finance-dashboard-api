@@ -1,1 +1,1 @@
-const name = ''
+console.log('Hello from API!')
