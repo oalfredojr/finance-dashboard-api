@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 
 import { PostgresCreateUserRepository } from '../repositories/postgres/create-user.js'
 
-export class CreateUseCase {
+export class CreateUserCase {
     async execute(createUserPARAMS) {
         // TODO: verificar se o e-mail já esta em uso
 
