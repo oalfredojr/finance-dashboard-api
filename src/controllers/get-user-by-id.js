@@ -1,7 +1,6 @@
-import { serverError } from '../helpers.js'
+import { badRequest, ok, serverError } from '../helpers/http-helper.js'
 import { GetUserByIdUseCase } from '../use-cases/get-user-by-id.js'
-import { badRequest, ok } from './helpers.js'
-import { validator } from 'validator'
+import validator from 'validator' // Importação correta do validator
 
 export class GetUserByIdController {
     async execute(httpRequest) {

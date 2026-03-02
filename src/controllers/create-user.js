@@ -1,5 +1,5 @@
 import { CreateUserCase } from '../use-cases/create-user.js'
-import { badRequest, created, serverError } from './helpers.js'
+import { badRequest, created, serverError } from '../helpers/http-helper.js'
 import validator from 'validator'
 
 export class CreateUserController {
