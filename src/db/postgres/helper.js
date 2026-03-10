@@ -5,7 +5,7 @@ dotenv.config()
 
 const { Pool } = pg
 
-export const pool = new Pool({
+const pool = new Pool({
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     port: process.env.POSTGRES_PORT,
@@ -13,14 +13,18 @@ export const pool = new Pool({
     host: process.env.POSTGRES_HOST,
 })
 
-export const PostgresHelper = {
-    query: async (query, params) => {
+// unified helper class used throughout the repo
+export class PostgresHelper {
+    static async query(text, params) {
         const client = await pool.connect()
-
-        const results = await client.query(query, params)
-
-        await client.release()
-
-        return results.rows
-    },
+        try {
+            const res = await client.query(text, params)
+            return res.rows
+        } finally {
+            client.release()
+        }
+    }
 }
+
+// export pool for migration scripts or low-level access
+export { pool }
