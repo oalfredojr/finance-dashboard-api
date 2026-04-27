@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import { PostgresUpdateUserRepository } from '../repositories/update-user.js'
+import { PostgresUpdateUserRepository } from '../repositories/postgres/update-user.js'
 import { PostgresGetUserByIdRepository } from '../repositories/postgres/get-user-by-id.js'
 import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
 import { EmailALreadyExistsError } from '../errors/user.js'
@@ -12,7 +12,7 @@ export class UpdateUserCase {
         const user = await postgresGetUserByIdRepository.execute(userId)
 
         if (!user) {
-            throw new Error('User not found')
+            return null
         }
 
         // If updating email, check if it's already taken by another user
