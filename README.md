@@ -121,20 +121,39 @@ POSTGRES_DB=financeapp
 
 ## 📌 Funcionalidades da API
 
-### Usuários
+### Autenticação
 
-- **POST /api/users** - Criar um novo usuário
-- **GET /api/users/:userId** - Obter usuário por ID
+- **POST /api/auth/register** - Registrar novo usuário
+- **POST /api/auth/login** - Fazer login (retorna JWT token)
+
+**Campos para login:**
+
+- `email` (string)
+- `password` (string)
+
+**Resposta do login:**
+
+```json
+{
+    "user": {
+        "id": "uuid",
+        "first_name": "string",
+        "last_name": "string",
+        "email": "string"
+    },
+    "token": "jwt-token"
+}
+```
+
+**Como usar o token:**
+Inclua no header das requisições: `Authorization: Bearer <token>`
+
+### Usuários (Requer Autenticação)
+
+- **GET /api/users/:userId** - Obter dados do usuário
 - **PATCH /api/users/:userId** - Atualizar usuário
 
-**Campos obrigatórios para criação:**
-
-- `first_name` (string)
-- `last_name` (string)
-- `email` (string, formato válido)
-- `password` (string, mínimo 6 caracteres)
-
-### Transações
+### Transações (Requer Autenticação)
 
 - **POST /api/transactions** - Criar uma nova transação
 - **GET /api/transactions/user/:userId** - Listar transações do usuário
@@ -155,7 +174,7 @@ POSTGRES_DB=financeapp
 - `month` e `year` - Filtrar por mês/ano
 - `limit` - Limitar número de resultados (1-100)
 
-### Dashboard
+### Dashboard (Requer Autenticação)
 
 - **GET /api/transactions/dashboard/:userId** - Resumo financeiro do usuário
 
