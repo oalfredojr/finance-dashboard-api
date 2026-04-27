@@ -6,12 +6,14 @@ Uma API moderna para gerenciamento financeiro, construída por **Alfredo Corrêa
 
 ## 🚀 Tecnologias Utilizadas
 
-* **Node.js**
-* **Express**
-* **Prisma ORM**
-* **SQLite / PostgreSQL** (dependendo do ambiente)
-* **Clean Architecture** (Controllers, Use-Cases, Helpers)
-* **ES Modules**
+- **Node.js**
+- **Express**
+- **PostgreSQL**
+- **Clean Architecture** (Controllers, Use-Cases, Repositories, Helpers)
+- **ES Modules**
+- **bcrypt** para hash de senhas
+- **UUID** para IDs únicos
+- **Validator** para validações
 
 ---
 
@@ -19,33 +21,155 @@ Uma API moderna para gerenciamento financeiro, construída por **Alfredo Corrêa
 
 ```
 finance-dashboard-api/
+│   index.js
 │   package.json
-│   prisma/schema.prisma
-│   server.js
+│   .env
+│   .eslintrc.json
+│   .prettierrc.json
 │
-├── controllers/
-│   └── create-user-controller.js
-│
-├── use-cases/
-│   └── create-user.js
-│
-├── helpers/
-│   └── http-helpers.js
-│
-└── config/
-    └── env.js
+├── src/
+│   ├── controllers/
+│   │   ├── create-user.js
+│   │   ├── get-user-by-id.js
+│   │   └── update-user.js
+│   │
+│   ├── use-cases/
+│   │   ├── create-user.js
+│   │   ├── get-user-by-id.js
+│   │   └── update-user.js
+│   │
+│   ├── repositories/
+│   │   └── postgres/
+│   │       ├── create-user.js
+│   │       ├── get-user-by-email.js
+│   │       ├── get-user-by-id.js
+│   │       └── update-user.js
+│   │
+│   ├── db/
+│   │   └── postgres/
+│   │       ├── helper.js
+│   │       └── migrations/
+│   │           ├── 01-init.sql
+│   │           └── exec.js
+│   │
+│   ├── errors/
+│   │   └── user.js
+│   │
+│   ├── helpers/
+│   │   └── http-helper.js
+│   │
+│   └── routes/
+│       └── users.js
 ```
 
 ---
 
-## 📌 Objetivo da API
+## 📋 Pré-requisitos
 
-O sistema permite:
+- Node.js (versão 18 ou superior)
+- PostgreSQL
+- npm ou yarn
 
-* Criar usuários
-* Validar requisições
-* Tratar erros de forma padronizada
-* Preparar base para controle financeiro (transações futuras)
+---
+
+## 🛠️ Instalação e Configuração
+
+1. **Clone o repositório:**
+
+    ```bash
+    git clone <url-do-repositorio>
+    cd finance-dashboard-api
+    ```
+
+2. **Instale as dependências:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Configure o banco de dados PostgreSQL:**
+    - Crie um banco de dados chamado `financeapp`
+    - Configure as variáveis de ambiente no arquivo `.env` (veja exemplo abaixo)
+
+4. **Execute as migrações:**
+
+    ```bash
+    npm run migrations
+    ```
+
+5. **Inicie o servidor:**
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## ⚙️ Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+
+```env
+PORT=8080
+POSTGRES_USER=seu_usuario
+POSTGRES_PASSWORD=sua_senha
+POSTGRES_PORT=5432
+POSTGRES_HOST=localhost
+POSTGRES_DB=financeapp
+```
+
+---
+
+## 📌 Funcionalidades da API
+
+### Usuários
+
+- **POST /api/users** - Criar um novo usuário
+- **GET /api/users/:userId** - Obter usuário por ID
+- **PATCH /api/users/:userId** - Atualizar usuário
+
+**Campos obrigatórios para criação:**
+
+- `first_name` (string)
+- `last_name` (string)
+- `email` (string, formato válido)
+- `password` (string, mínimo 6 caracteres)
+
+---
+
+## 🧪 Testes
+
+Para executar os testes (quando implementados):
+
+```bash
+npm test
+```
+
+---
+
+## 📝 Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor em modo de desenvolvimento
+- `npm run migrations` - Executa as migrações do banco de dados
+- `npm run postinstall` - Configura hooks do Husky
+
+---
+
+## 🔒 Segurança
+
+- Senhas são hasheadas com bcrypt
+- Validação de entrada com validator
+- Estrutura em camadas para separação de responsabilidades
+
+---
+
+## 📈 Melhorias Futuras
+
+- Implementar autenticação JWT
+- Adicionar testes unitários e de integração
+- Implementar funcionalidades de transações financeiras
+- Adicionar documentação com Swagger
+- Implementar rate limiting e CORS
+- Adicionar logging estruturado
 
 ---
 
@@ -92,18 +216,18 @@ http://localhost:3333
 
 ```json
 {
-  "first_name": "Alfredo",
-  "last_name": "Junior",
-  "email": "teste@example.com",
-  "password": "123456"
+    "first_name": "Alfredo",
+    "last_name": "Junior",
+    "email": "teste@example.com",
+    "password": "123456"
 }
 ```
 
 ### ✔ Possíveis respostas:
 
-* `201 Created` → Usuário criado
-* `400 Bad Request` → Dados faltando ou inválidos
-* `500 Internal Server Error` → Erro inesperado
+- `201 Created` → Usuário criado
+- `400 Bad Request` → Dados faltando ou inválidos
+- `500 Internal Server Error` → Erro inesperado
 
 ---
 
@@ -111,19 +235,19 @@ http://localhost:3333
 
 Você criou helpers profissionais para padronizar o retorno:
 
-* `badRequest()` → 400
-* `created()` → 201
-* `serverError()` → 500
+- `badRequest()` → 400
+- `created()` → 201
+- `serverError()` → 500
 
 ---
 
 ## 💡 Próximos Passos Sugeridos
 
-* [ ] Criar autenticação (JWT)
-* [ ] Criar gerenciamento de transações financeiras
-* [ ] Saldo calculado automaticamente
-* [ ] Criar testes automatizados
-* [ ] Deploy no Railway / Render
+- [ ] Criar autenticação (JWT)
+- [ ] Criar gerenciamento de transações financeiras
+- [ ] Saldo calculado automaticamente
+- [ ] Criar testes automatizados
+- [ ] Deploy no Railway / Render
 
 ---
 

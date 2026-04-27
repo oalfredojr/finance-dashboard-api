@@ -5,7 +5,10 @@
     "main": "index.js",
     "scripts": {
         "dev": "npm run start:dev",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
+        "lint": "eslint src/ index.js",
+        "lint:fix": "eslint src/ index.js --fix",
+        "format": "prettier --write .",
         "postinstall": "npx husky install",
         "migrations": "node src/db/postgres/migrations/exec.js",
         "start:dev": "node --watch index.js"
@@ -14,20 +17,38 @@
     "author": "",
     "license": "ISC",
     "type": "module",
+    "jest": {
+        "preset": null,
+        "extensionsToTreatAsEsm": [
+            ".js"
+        ],
+        "globals": {
+            "ts-jest": {
+                "useESM": true
+            }
+        },
+        "moduleNameMapping": {
+            "^(\\.{1,2}/.*)\\.js$": "$1"
+        },
+        "transform": {}
+    },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
+        "eslint": "^9.39.4",
         "git-commit-msg-linter": "^5.0.8",
         "globals": "^16.5.0",
         "husky": "^9.1.7",
+        "jest": "^30.3.0",
         "lint-staged": "^16.2.6",
-        "prettier": "^3.6.2"
+        "prettier": "^3.6.2",
+        "supertest": "^7.2.2"
     },
     "dependencies": {
         "bcrypt": "^6.0.0",
-        "bcryptjs": "^3.0.3",
+        "cors": "^2.8.6",
         "dotenv": "^17.2.3",
-        "eslint": "^8.57.1",
-        "express": "^5.2.1",
+        "express": "^4.22.1",
+        "helmet": "^8.1.0",
         "pg": "^8.17.2",
         "uuid": "^13.0.0",
         "validator": "^13.15.23"
