@@ -134,6 +134,41 @@ POSTGRES_DB=financeapp
 - `email` (string, formato válido)
 - `password` (string, mínimo 6 caracteres)
 
+### Transações
+
+- **POST /api/transactions** - Criar uma nova transação
+- **GET /api/transactions/user/:userId** - Listar transações do usuário
+- **PATCH /api/transactions/:transactionId** - Atualizar transação
+- **DELETE /api/transactions/:transactionId** - Deletar transação
+
+**Campos obrigatórios para criação de transação:**
+
+- `user_id` (UUID)
+- `name` (string)
+- `date` (string, formato ISO 8601)
+- `amount` (number, positivo)
+- `type` (string: "EARNING", "EXPENSE", "INVESTMENT")
+
+**Filtros disponíveis para listagem:**
+
+- `type` - Filtrar por tipo (EARNING, EXPENSE, INVESTMENT)
+- `month` e `year` - Filtrar por mês/ano
+- `limit` - Limitar número de resultados (1-100)
+
+### Dashboard
+
+- **GET /api/transactions/dashboard/:userId** - Resumo financeiro do usuário
+
+**Filtros disponíveis:**
+
+- `month` e `year` - Filtrar resumo por mês/ano
+
+**Resposta inclui:**
+
+- `balance` - Saldo total (ganhos - gastos - investimentos)
+- `totals` - Totais por tipo (EARNING, EXPENSE, INVESTMENT)
+- `categories` - Quebra por categoria (top 10)
+
 ---
 
 ## 🧪 Testes
