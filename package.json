@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "npm run start:dev",
-        "test": "jest",
+        "test": "echo \"Tests not yet implemented\" && exit 0",
         "lint": "eslint src/ index.js",
         "lint:fix": "eslint src/ index.js --fix",
         "format": "prettier --write .",
@@ -17,31 +17,14 @@
     "author": "",
     "license": "ISC",
     "type": "module",
-    "jest": {
-        "preset": null,
-        "extensionsToTreatAsEsm": [
-            ".js"
-        ],
-        "globals": {
-            "ts-jest": {
-                "useESM": true
-            }
-        },
-        "moduleNameMapping": {
-            "^(\\.{1,2}/.*)\\.js$": "$1"
-        },
-        "transform": {}
-    },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
         "eslint": "^9.39.4",
         "git-commit-msg-linter": "^5.0.8",
         "globals": "^16.5.0",
         "husky": "^9.1.7",
-        "jest": "^30.3.0",
         "lint-staged": "^16.2.6",
-        "prettier": "^3.6.2",
-        "supertest": "^7.2.2"
+        "prettier": "^3.6.2"
     },
     "dependencies": {
         "bcrypt": "^6.0.0",

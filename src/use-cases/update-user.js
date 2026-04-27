@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import { PostgresUpdateUserRepository } from '../repositories/postgres/update-user.js'
 import { PostgresGetUserByIdRepository } from '../repositories/postgres/get-user-by-id.js'
 import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'

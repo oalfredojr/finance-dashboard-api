@@ -3,6 +3,7 @@ import express from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import usersRouter from './src/routes/users.js'
+import transactionsRouter from './src/routes/transactions.js'
 
 const app = express()
 
@@ -18,8 +19,9 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() })
 })
 
-// mount user router
+// mount routers
 app.use('/api/users', usersRouter)
+app.use('/api/transactions', transactionsRouter)
 
 // 404 handler
 app.use('*', (req, res) => {
