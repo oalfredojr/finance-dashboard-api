@@ -4,6 +4,8 @@ import helmet from 'helmet'
 import cors from 'cors'
 import usersRouter from './src/routes/users.js'
 import transactionsRouter from './src/routes/transactions.js'
+import authRouter from './src/routes/auth.js'
+import { authMiddleware } from './src/middlewares/auth.js'
 
 const app = express()
 
@@ -20,8 +22,9 @@ app.get('/health', (req, res) => {
 })
 
 // mount routers
-app.use('/api/users', usersRouter)
-app.use('/api/transactions', transactionsRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/users', authMiddleware, usersRouter)
+app.use('/api/transactions', authMiddleware, transactionsRouter)
 
 // 404 handler
 app.use('*', (req, res) => {
