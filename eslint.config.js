@@ -20,7 +20,7 @@ export default [
         },
     },
     {
-        files: ['**/__tests__/**/*.js', '**/*.test.js'],
+        files: ['**/__tests__/**/*.js', '**/*.test.js', 'jest.setup.js'],
         languageOptions: {
             globals: {
                 jest: 'readonly',
