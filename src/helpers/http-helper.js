@@ -3,6 +3,11 @@ export const badRequest = (body) => ({
     body,
 })
 
+export const conflict = (body) => ({
+    statusCode: 409,
+    body,
+})
+
 export const created = (body) => ({
     statusCode: 201,
     body,
