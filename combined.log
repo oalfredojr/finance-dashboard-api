@@ -1,0 +1,37 @@
+{"ip":"127.0.0.1","level":"warn","message":"Authorization header missing","service":"finance-api","timestamp":"2026-05-25 18:07:18"}
+{"ip":"127.0.0.1","level":"warn","message":"Token missing in authorization header","service":"finance-api","timestamp":"2026-05-25 18:07:18"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:07:18","userId":"550e8400-e29b-41d4-a716-446655440000"}
+{"ip":"127.0.0.1","level":"warn","message":"Authorization header missing","service":"finance-api","timestamp":"2026-05-25 18:07:38"}
+{"ip":"127.0.0.1","level":"warn","message":"Token missing in authorization header","service":"finance-api","timestamp":"2026-05-25 18:07:38"}
+{"error":"Token expired","level":"warn","message":"Token expired","service":"finance-api","timestamp":"2026-05-25 18:07:38"}
+{"error":"Invalid token","level":"warn","message":"Invalid token","service":"finance-api","timestamp":"2026-05-25 18:07:38"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:07:38","userId":"550e8400-e29b-41d4-a716-446655440000"}
+{"ip":"127.0.0.1","level":"warn","message":"Authorization header missing","service":"finance-api","timestamp":"2026-05-25 18:08:02"}
+{"ip":"127.0.0.1","level":"warn","message":"Token missing in authorization header","service":"finance-api","timestamp":"2026-05-25 18:08:02"}
+{"error":"Token expired","level":"warn","message":"Token expired","service":"finance-api","timestamp":"2026-05-25 18:08:02"}
+{"error":"Invalid token","level":"warn","message":"Invalid token","service":"finance-api","timestamp":"2026-05-25 18:08:02"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:08:02","userId":"550e8400-e29b-41d4-a716-446655440000"}
+{"ip":"127.0.0.1","level":"warn","message":"Authorization header missing","service":"finance-api","timestamp":"2026-05-25 18:08:49"}
+{"ip":"127.0.0.1","level":"warn","message":"Token missing in authorization header","service":"finance-api","timestamp":"2026-05-25 18:08:49"}
+{"error":"Token expired","level":"warn","message":"Token expired","service":"finance-api","timestamp":"2026-05-25 18:08:49"}
+{"error":"Invalid token","level":"warn","message":"Invalid token","service":"finance-api","timestamp":"2026-05-25 18:08:49"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:08:49","userId":"550e8400-e29b-41d4-a716-446655440000"}
+{"level":"info","message":"Server listening on port 8080","service":"finance-api","timestamp":"2026-05-25 18:41:25"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:46","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:46","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:46","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:46","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:53","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:53","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:53","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:44:53","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:46:17","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:46:17","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:47:07","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:47:07","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:47:43","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:47:43","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:47:43","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"level":"info","message":"User authenticated successfully","service":"finance-api","timestamp":"2026-05-25 18:47:43","userId":"e5dcb973-6b4d-4771-9608-28e81ea4dd17"}
+{"error":"jwt malformed","level":"warn","message":"Invalid token","service":"finance-api","timestamp":"2026-05-25 18:50:08"}
+{"error":"jwt malformed","level":"warn","message":"Invalid token","service":"finance-api","timestamp":"2026-05-25 18:50:47"}
