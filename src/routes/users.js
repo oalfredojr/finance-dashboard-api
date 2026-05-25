@@ -14,14 +14,20 @@ router.post('/', async (req, res) => {
 
 router.get('/:userId', async (req, res) => {
     const controller = new GetUserByIdController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
 
     res.status(statusCode).send(body)
 })
 
 router.patch('/:userId', async (req, res) => {
     const controller = new UpdateUserController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
 
     res.status(statusCode).json(body)
 })

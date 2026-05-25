@@ -17,6 +17,16 @@ export class UpdateUserController {
                 return badRequest({ message: 'The provided id is not valid.' })
             }
 
+            // Authorization check: user can only update their own data
+            if (httpRequest.user.id !== httpRequest.params.userId) {
+                return {
+                    statusCode: 403,
+                    body: {
+                        message: 'Forbidden: You can only update your own data',
+                    },
+                }
+            }
+
             const params = httpRequest.body
 
             // Optional validation: ensure at least one field is provided

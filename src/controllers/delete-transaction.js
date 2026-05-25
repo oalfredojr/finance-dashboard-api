@@ -18,8 +18,10 @@ export class DeleteTransactionController {
             }
 
             const deleteTransactionUseCase = new DeleteTransactionUseCase()
-            const deletedTransaction =
-                await deleteTransactionUseCase.execute(transactionId)
+            const deletedTransaction = await deleteTransactionUseCase.execute(
+                transactionId,
+                httpRequest.user.id,
+            )
 
             if (!deletedTransaction) {
                 return notFound({ message: 'Transaction not found' })
@@ -33,6 +35,15 @@ export class DeleteTransactionController {
             console.error(error)
             if (error.message === 'Transaction not found') {
                 return notFound({ message: error.message })
+            }
+            if (
+                error.message ===
+                'Unauthorized: Transaction does not belong to this user'
+            ) {
+                return {
+                    statusCode: 403,
+                    body: { message: error.message },
+                }
             }
             return serverError()
         }

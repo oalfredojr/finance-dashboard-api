@@ -13,6 +13,17 @@ export class GetTransactionsController {
                 return badRequest({ message: 'Invalid userId format' })
             }
 
+            // Authorization check: user can only access their own transactions
+            if (httpRequest.user.id !== userId) {
+                return {
+                    statusCode: 403,
+                    body: {
+                        message:
+                            'Forbidden: You can only access your own transactions',
+                    },
+                }
+            }
+
             // Validate filters
             const filters = {}
 

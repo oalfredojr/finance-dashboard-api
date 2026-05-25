@@ -6,6 +6,12 @@ export class PostgresGetTransactionsRepository {
         const params = [userId]
         let paramIndex = 2
 
+        if (filters.transactionId) {
+            query += ` AND id = $${paramIndex}`
+            params.push(filters.transactionId)
+            paramIndex++
+        }
+
         if (filters.type) {
             query += ` AND type = $${paramIndex}`
             params.push(filters.type)

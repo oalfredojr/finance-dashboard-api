@@ -16,6 +16,16 @@ export class GetUserByIdController {
                 return badRequest({ message: 'The provide id is not valid.' })
             }
 
+            // Authorization check: user can only access their own data
+            if (httpRequest.user.id !== httpRequest.params.userId) {
+                return {
+                    statusCode: 403,
+                    body: {
+                        message: 'Forbidden: You can only access your own data',
+                    },
+                }
+            }
+
             const getUserByIdUseCase = new GetUserByIdUseCase()
 
             const user = await getUserByIdUseCase.execute(
