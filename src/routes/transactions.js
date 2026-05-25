@@ -16,26 +16,38 @@ router.post('/', async (req, res) => {
 
 router.get('/user/:userId', async (req, res) => {
     const controller = new GetTransactionsController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
     res.status(statusCode).json(body)
 })
 
 router.patch('/:transactionId', async (req, res) => {
     const controller = new UpdateTransactionController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
     res.status(statusCode).json(body)
 })
 
 router.delete('/:transactionId', async (req, res) => {
     const controller = new DeleteTransactionController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
     res.status(statusCode).json(body)
 })
 
 // Dashboard routes
 router.get('/dashboard/:userId', async (req, res) => {
     const controller = new GetDashboardSummaryController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
     res.status(statusCode).json(body)
 })
 
