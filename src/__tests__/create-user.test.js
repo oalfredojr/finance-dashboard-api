@@ -1,6 +1,6 @@
 import { CreateUserController } from '../controllers/create-user.js'
 import { CreateUserCase } from '../use-cases/create-user.js'
-import { EmailALreadyExistsError } from '../errors/user.js'
+import { EmailAlreadyExistsError } from '../errors/user.js'
 
 // Mock do use case
 jest.mock('../use-cases/create-user.js')
@@ -126,7 +126,7 @@ describe('CreateUserController', () => {
         }
 
         mockCreateUserCase.execute.mockRejectedValue(
-            new EmailALreadyExistsError('john@example.com'),
+            new EmailAlreadyExistsError('john@example.com'),
         )
 
         const result = await controller.execute(httpRequest)
