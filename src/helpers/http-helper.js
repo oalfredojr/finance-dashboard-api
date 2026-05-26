@@ -27,3 +27,8 @@ export const notFound = (body) => ({
     statusCode: 404,
     body,
 })
+
+export const forbidden = (body) => ({
+    statusCode: 403,
+    body,
+})

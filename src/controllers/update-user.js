@@ -6,7 +6,7 @@ import {
     serverError,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
-import { EmailALreadyExistsError } from '../errors/user.js'
+import { EmailAlreadyExistsError } from '../errors/user.js'
 
 export class UpdateUserController {
     async execute(httpRequest) {
@@ -61,7 +61,7 @@ export class UpdateUserController {
 
             return ok(updatedUser)
         } catch (error) {
-            if (error instanceof EmailALreadyExistsError) {
+            if (error instanceof EmailAlreadyExistsError) {
                 return badRequest({ message: error.message })
             }
             if (error.message === 'User not found') {
