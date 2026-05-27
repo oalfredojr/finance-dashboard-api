@@ -3,9 +3,10 @@ import {
     notFound,
     ok,
     serverError,
+    removePassword,
 } from '../helpers/http-helper.js'
 import { GetUserByIdUseCase } from '../use-cases/get-user-by-id.js'
-import validator from 'validator' // Importação correta do validator
+import validator from 'validator'
 
 export class GetUserByIdController {
     async execute(httpRequest) {
@@ -13,7 +14,7 @@ export class GetUserByIdController {
             const isIdValid = validator.isUUID(httpRequest.params.userId)
 
             if (!isIdValid) {
-                return badRequest({ message: 'The provide id is not valid.' })
+                return badRequest({ message: 'The provided id is not valid.' })
             }
 
             // Authorization check: user can only access their own data
@@ -36,7 +37,7 @@ export class GetUserByIdController {
                 return notFound({ message: 'User not found.' })
             }
 
-            return ok(user)
+            return ok(removePassword(user))
         } catch (error) {
             console.log(error)
             return serverError()
