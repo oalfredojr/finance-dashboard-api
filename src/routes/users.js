@@ -5,23 +5,22 @@ import { UpdateUserController } from '../controllers/update-user.js'
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
-    const controller = new CreateUserController()
-    const { statusCode, body } = await controller.execute(req)
-
-    res.status(statusCode).json(body)
-})
-
 router.get('/:userId', async (req, res) => {
     const controller = new GetUserByIdController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
 
     res.status(statusCode).send(body)
 })
 
 router.patch('/:userId', async (req, res) => {
     const controller = new UpdateUserController()
-    const { statusCode, body } = await controller.execute(req)
+    const { statusCode, body } = await controller.execute({
+        ...req,
+        user: req.user,
+    })
 
     res.status(statusCode).json(body)
 })

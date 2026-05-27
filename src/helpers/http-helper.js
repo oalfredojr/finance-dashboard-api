@@ -3,6 +3,11 @@ export const badRequest = (body) => ({
     body,
 })
 
+export const conflict = (body) => ({
+    statusCode: 409,
+    body,
+})
+
 export const created = (body) => ({
     statusCode: 201,
     body,
@@ -22,3 +27,14 @@ export const notFound = (body) => ({
     statusCode: 404,
     body,
 })
+
+export const forbidden = (body) => ({
+    statusCode: 403,
+    body,
+})
+
+export const removePassword = (user) => {
+    if (!user) return user
+    const { password, ...safeUser } = user
+    return safeUser
+}
