@@ -37,8 +37,8 @@ app.use('*', (req, res) => {
 })
 
 // Error handler
-app.use((err, req, res) => {
-    logger.error('Unhandled error', { error: err.message, stack: err.stack })
+app.use((err, req, res, next) => {
+    logger.error('Unhandled error', { error: err?.message, stack: err?.stack })
     res.status(500).json({ message: 'Internal server error' })
 })
 

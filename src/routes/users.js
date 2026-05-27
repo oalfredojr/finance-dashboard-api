@@ -5,13 +5,6 @@ import { UpdateUserController } from '../controllers/update-user.js'
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
-    const controller = new CreateUserController()
-    const { statusCode, body } = await controller.execute(req)
-
-    res.status(statusCode).json(body)
-})
-
 router.get('/:userId', async (req, res) => {
     const controller = new GetUserByIdController()
     const { statusCode, body } = await controller.execute({

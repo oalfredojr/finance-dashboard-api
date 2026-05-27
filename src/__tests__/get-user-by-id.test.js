@@ -51,7 +51,7 @@ describe('GetUserByIdController', () => {
         const result = await controller.execute(httpRequest)
 
         expect(result.statusCode).toBe(400)
-        expect(result.body.message).toBe('The provide id is not valid.')
+        expect(result.body.message).toBe('The provided id is not valid.')
     })
 
     test('should return 404 if user not found', async () => {

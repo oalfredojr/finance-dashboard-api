@@ -4,6 +4,7 @@ import {
     created,
     serverError,
     conflict,
+    removePassword,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
 import { EmailAlreadyExistsError } from '../errors/user.js'
@@ -43,8 +44,9 @@ export class CreateUserController {
             const createUserCase = new CreateUserCase()
 
             const createdUser = await createUserCase.execute(params)
+            const responseUser = removePassword(createdUser)
 
-            return created(createdUser)
+            return created(responseUser)
         } catch (error) {
             if (error instanceof EmailAlreadyExistsError) {
                 return conflict({ message: error.message })

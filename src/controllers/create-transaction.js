@@ -5,9 +5,12 @@ import validator from 'validator'
 export class CreateTransactionController {
     async execute(httpRequest) {
         try {
-            const params = httpRequest.body
+            const params = {
+                ...httpRequest.body,
+                user_id: httpRequest.user.id,
+            }
 
-            const requiredFields = ['user_id', 'name', 'date', 'amount', 'type']
+            const requiredFields = ['name', 'date', 'amount', 'type']
 
             for (const field of requiredFields) {
                 if (

@@ -32,3 +32,9 @@ export const forbidden = (body) => ({
     statusCode: 403,
     body,
 })
+
+export const removePassword = (user) => {
+    if (!user) return user
+    const { password, ...safeUser } = user
+    return safeUser
+}

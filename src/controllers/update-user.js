@@ -4,6 +4,7 @@ import {
     notFound,
     ok,
     serverError,
+    removePassword,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
 import { EmailAlreadyExistsError } from '../errors/user.js'
@@ -59,7 +60,7 @@ export class UpdateUserController {
                 return notFound({ message: 'User not found.' })
             }
 
-            return ok(updatedUser)
+            return ok(removePassword(updatedUser))
         } catch (error) {
             if (error instanceof EmailAlreadyExistsError) {
                 return badRequest({ message: error.message })
