@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { PostgresCreateTransactionRepository } from '../repositories/postgres/create-transaction.js'
+import { PostgresGetUserByIdRepository } from '../repositories/postgres/get-user-by-id.js'
 
 export class CreateTransactionUseCase {
     async execute(createTransactionParams) {
@@ -12,6 +13,17 @@ export class CreateTransactionUseCase {
             if (!createTransactionParams[field]) {
                 throw new Error(`Missing required field: ${field}`)
             }
+        }
+
+        // Ensure user exists
+        const postgresGetUserByIdRepository =
+            new PostgresGetUserByIdRepository()
+        const user = await postgresGetUserByIdRepository.execute(
+            createTransactionParams.user_id,
+        )
+
+        if (!user) {
+            throw new Error('User not found')
         }
 
         // Validate type

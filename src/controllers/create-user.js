@@ -1,7 +1,13 @@
 import { CreateUserCase } from '../use-cases/create-user.js'
-import { badRequest, created, serverError } from '../helpers/http-helper.js'
+import {
+    badRequest,
+    created,
+    serverError,
+    conflict,
+    removePassword,
+} from '../helpers/http-helper.js'
 import validator from 'validator'
-import { EmailALreadyExistsError } from '../errors/user.js'
+import { EmailAlreadyExistsError } from '../errors/user.js'
 
 export class CreateUserController {
     async execute(httpRequest) {
@@ -38,11 +44,12 @@ export class CreateUserController {
             const createUserCase = new CreateUserCase()
 
             const createdUser = await createUserCase.execute(params)
+            const responseUser = removePassword(createdUser)
 
-            return created(createdUser)
+            return created(responseUser)
         } catch (error) {
-            if (error instanceof EmailALreadyExistsError) {
-                return badRequest({ message: error.message })
+            if (error instanceof EmailAlreadyExistsError) {
+                return conflict({ message: error.message })
             }
             console.error(error)
             return serverError()

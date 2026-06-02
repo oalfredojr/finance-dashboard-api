@@ -4,9 +4,10 @@ import {
     notFound,
     ok,
     serverError,
+    removePassword,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
-import { EmailALreadyExistsError } from '../errors/user.js'
+import { EmailAlreadyExistsError } from '../errors/user.js'
 
 export class UpdateUserController {
     async execute(httpRequest) {
@@ -15,6 +16,16 @@ export class UpdateUserController {
 
             if (!isIdValid) {
                 return badRequest({ message: 'The provided id is not valid.' })
+            }
+
+            // Authorization check: user can only update their own data
+            if (httpRequest.user.id !== httpRequest.params.userId) {
+                return {
+                    statusCode: 403,
+                    body: {
+                        message: 'Forbidden: You can only update your own data',
+                    },
+                }
             }
 
             const params = httpRequest.body
@@ -49,9 +60,9 @@ export class UpdateUserController {
                 return notFound({ message: 'User not found.' })
             }
 
-            return ok(updatedUser)
+            return ok(removePassword(updatedUser))
         } catch (error) {
-            if (error instanceof EmailALreadyExistsError) {
+            if (error instanceof EmailAlreadyExistsError) {
                 return badRequest({ message: error.message })
             }
             if (error.message === 'User not found') {

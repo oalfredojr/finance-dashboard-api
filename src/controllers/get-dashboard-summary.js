@@ -13,6 +13,17 @@ export class GetDashboardSummaryController {
                 return badRequest({ message: 'Invalid userId format' })
             }
 
+            // Authorization check: user can only access their own dashboard
+            if (httpRequest.user.id !== userId) {
+                return {
+                    statusCode: 403,
+                    body: {
+                        message:
+                            'Forbidden: You can only access your own dashboard',
+                    },
+                }
+            }
+
             // Validate filters
             const filters = {}
 

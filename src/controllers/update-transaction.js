@@ -53,6 +53,7 @@ export class UpdateTransactionController {
             const updateTransactionUseCase = new UpdateTransactionUseCase()
             const updatedTransaction = await updateTransactionUseCase.execute(
                 transactionId,
+                httpRequest.user.id,
                 params,
             )
 
@@ -65,6 +66,15 @@ export class UpdateTransactionController {
             console.error(error)
             if (error.message === 'Transaction not found') {
                 return notFound({ message: error.message })
+            }
+            if (
+                error.message ===
+                'Unauthorized: Transaction does not belong to this user'
+            ) {
+                return {
+                    statusCode: 403,
+                    body: { message: error.message },
+                }
             }
             if (
                 error.message.includes('Invalid') ||
