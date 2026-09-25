@@ -313,4 +313,4 @@ Desenvolvedor Full Stack em evolução 🔥
 
 ---
 
-Se quiser, posso atualizar o README conforme você evoluir o projeto!
+
