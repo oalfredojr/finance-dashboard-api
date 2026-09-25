@@ -5,21 +5,23 @@ export const authMiddleware = (req, res, next) => {
     try {
         const authHeader = req.headers.authorization
 
-        if (!authHeader) {
+        if (!authHeader || typeof authHeader !== 'string') {
             logger.warn('Authorization header missing', { ip: req.ip })
             return res
                 .status(401)
                 .json({ message: 'Authorization header missing' })
         }
 
-        const token = authHeader.split(' ')[1] // Bearer TOKEN
+        const [scheme, token] = authHeader.split(' ')
 
-        if (!token) {
+        if (scheme !== 'Bearer' || !token) {
             logger.warn('Token missing in authorization header', { ip: req.ip })
             return res.status(401).json({ message: 'Token missing' })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET, {
+            algorithms: ['HS256'],
+        })
         req.user = decoded // { id, email, iat, exp }
 
         logger.info('User authenticated successfully', { userId: decoded.id })

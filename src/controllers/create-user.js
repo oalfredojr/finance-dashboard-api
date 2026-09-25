@@ -8,6 +8,7 @@ import {
 } from '../helpers/http-helper.js'
 import validator from 'validator'
 import { EmailAlreadyExistsError } from '../errors/user.js'
+import logger from '../helpers/logger.js'
 
 export class CreateUserController {
     async execute(httpRequest) {
@@ -51,7 +52,7 @@ export class CreateUserController {
             if (error instanceof EmailAlreadyExistsError) {
                 return conflict({ message: error.message })
             }
-            console.error(error)
+            logger.error('Create user error', { error: error.message })
             return serverError()
         }
     }

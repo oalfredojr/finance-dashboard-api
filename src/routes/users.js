@@ -1,5 +1,4 @@
 import express from 'express'
-import { CreateUserController } from '../controllers/create-user.js'
 import { GetUserByIdController } from '../controllers/get-user-by-id.js'
 import { UpdateUserController } from '../controllers/update-user.js'
 

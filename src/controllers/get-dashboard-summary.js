@@ -1,6 +1,7 @@
 import { GetDashboardSummaryUseCase } from '../use-cases/get-dashboard-summary.js'
 import { badRequest, ok, serverError } from '../helpers/http-helper.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class GetDashboardSummaryController {
     async execute(httpRequest) {
@@ -50,7 +51,9 @@ export class GetDashboardSummaryController {
 
             return ok(summary)
         } catch (error) {
-            console.error(error)
+            logger.error('Get dashboard summary error', {
+                error: error.message,
+            })
             return serverError()
         }
     }

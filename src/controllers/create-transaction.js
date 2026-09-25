@@ -6,6 +6,7 @@ import {
     notFound,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class CreateTransactionController {
     async execute(httpRequest) {
@@ -58,7 +59,7 @@ export class CreateTransactionController {
 
             return created(createdTransaction)
         } catch (error) {
-            console.error(error)
+            logger.error('Create transaction error', { error: error.message })
             if (
                 error.message.includes('Missing required field') ||
                 error.message.includes('Invalid') ||

@@ -1,6 +1,7 @@
 import { GetTransactionsUseCase } from '../use-cases/get-transactions.js'
 import { badRequest, ok, serverError } from '../helpers/http-helper.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class GetTransactionsController {
     async execute(httpRequest) {
@@ -70,7 +71,7 @@ export class GetTransactionsController {
 
             return ok(transactions)
         } catch (error) {
-            console.error(error)
+            logger.error('Get transactions error', { error: error.message })
             return serverError()
         }
     }

@@ -5,6 +5,23 @@ dotenv.config()
 
 const { Pool } = pg
 
+const requiredEnvVars = [
+    'POSTGRES_USER',
+    'POSTGRES_PASSWORD',
+    'POSTGRES_PORT',
+    'POSTGRES_DB',
+    'POSTGRES_HOST',
+]
+
+for (const envVar of requiredEnvVars) {
+    if (
+        process.env.NODE_ENV === 'production' &&
+        (!process.env[envVar] || process.env[envVar].includes('change_me'))
+    ) {
+        throw new Error(`Missing or insecure DB env: ${envVar}`)
+    }
+}
+
 const pool = new Pool({
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,

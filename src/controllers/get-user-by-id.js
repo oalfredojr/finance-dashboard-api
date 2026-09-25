@@ -7,6 +7,7 @@ import {
 } from '../helpers/http-helper.js'
 import { GetUserByIdUseCase } from '../use-cases/get-user-by-id.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class GetUserByIdController {
     async execute(httpRequest) {
@@ -39,7 +40,7 @@ export class GetUserByIdController {
 
             return ok(removePassword(user))
         } catch (error) {
-            console.log(error)
+            logger.error('Get user by id error', { error: error.message })
             return serverError()
         }
     }

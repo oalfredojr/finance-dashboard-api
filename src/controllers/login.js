@@ -1,6 +1,7 @@
 import { LoginUseCase } from '../use-cases/login.js'
 import { badRequest, ok, serverError } from '../helpers/http-helper.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class LoginController {
     async execute(httpRequest) {
@@ -26,7 +27,7 @@ export class LoginController {
 
             return ok(result)
         } catch (error) {
-            console.error(error)
+            logger.error('Login error', { error: error.message })
             if (error.message === 'Invalid credentials') {
                 return badRequest({ message: 'Invalid email or password' })
             }

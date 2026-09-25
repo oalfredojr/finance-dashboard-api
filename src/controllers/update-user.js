@@ -8,6 +8,7 @@ import {
 } from '../helpers/http-helper.js'
 import validator from 'validator'
 import { EmailAlreadyExistsError } from '../errors/user.js'
+import logger from '../helpers/logger.js'
 
 export class UpdateUserController {
     async execute(httpRequest) {
@@ -68,7 +69,7 @@ export class UpdateUserController {
             if (error.message === 'User not found') {
                 return notFound({ message: error.message })
             }
-            console.error(error)
+            logger.error('Update user error', { error: error.message })
             return serverError()
         }
     }

@@ -6,6 +6,7 @@ import {
     serverError,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class DeleteTransactionController {
     async execute(httpRequest) {
@@ -32,7 +33,7 @@ export class DeleteTransactionController {
                 transaction: deletedTransaction,
             })
         } catch (error) {
-            console.error(error)
+            logger.error('Delete transaction error', { error: error.message })
             if (error.message === 'Transaction not found') {
                 return notFound({ message: error.message })
             }

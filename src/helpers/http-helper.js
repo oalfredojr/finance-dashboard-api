@@ -35,6 +35,8 @@ export const forbidden = (body) => ({
 
 export const removePassword = (user) => {
     if (!user) return user
-    const { password, ...safeUser } = user
+
+    const safeUser = { ...user }
+    delete safeUser.password
     return safeUser
 }

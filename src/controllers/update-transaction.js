@@ -6,6 +6,7 @@ import {
     serverError,
 } from '../helpers/http-helper.js'
 import validator from 'validator'
+import logger from '../helpers/logger.js'
 
 export class UpdateTransactionController {
     async execute(httpRequest) {
@@ -63,7 +64,7 @@ export class UpdateTransactionController {
 
             return ok(updatedTransaction)
         } catch (error) {
-            console.error(error)
+            logger.error('Update transaction error', { error: error.message })
             if (error.message === 'Transaction not found') {
                 return notFound({ message: error.message })
             }

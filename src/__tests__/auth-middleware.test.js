@@ -99,7 +99,9 @@ describe('authMiddleware', () => {
 
         authMiddleware(req, res, next)
 
-        expect(jwt.verify).toHaveBeenCalledWith(token, 'test-secret')
+        expect(jwt.verify).toHaveBeenCalledWith(token, 'test-secret', {
+            algorithms: ['HS256'],
+        })
         expect(req.user).toEqual(decoded)
         expect(next).toHaveBeenCalled()
         expect(res.status).not.toHaveBeenCalled()

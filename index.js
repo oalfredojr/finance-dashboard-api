@@ -11,9 +11,26 @@ import logger from './src/helpers/logger.js'
 
 const app = express()
 
+if (
+    process.env.NODE_ENV === 'production' &&
+    (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('change_me'))
+) {
+    throw new Error('JWT_SECRET must be configured with a real value')
+}
+
 // Security middleware
-app.use(helmet())
-app.use(cors())
+app.use(
+    helmet({
+        crossOriginResourcePolicy: false,
+    }),
+)
+app.use(
+    cors({
+        origin: true,
+        credentials: true,
+        methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    }),
+)
 
 // Rate limiting for all API endpoints
 app.use(apiLimiter)
@@ -37,7 +54,7 @@ app.use('*', (req, res) => {
 })
 
 // Error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     logger.error('Unhandled error', { error: err?.message, stack: err?.stack })
     res.status(500).json({ message: 'Internal server error' })
 })

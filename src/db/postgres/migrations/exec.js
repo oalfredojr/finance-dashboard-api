@@ -15,10 +15,6 @@ const execMigrations = async () => {
         const script = fs.readFileSync(filePath, 'utf-8')
 
         await client.query(script)
-
-        console.log('Migration executed successfully')
-    } catch (error) {
-        console.error(error)
     } finally {
         await client.release()
     }
