@@ -294,6 +294,7 @@ Crie um arquivo `.env` na raiz do projeto:
 ```env
 PORT=8080
 JWT_SECRET=your-super-secret-jwt-key-here
+CORS_ORIGINS=http://localhost:5173
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 POSTGRES_DB=finance_dashboard
@@ -310,6 +311,9 @@ npm run dev
 # Produção
 npm start
 ```
+
+Em produção, configure `CORS_ORIGINS` no ambiente do serviço com as origens
+exatas do frontend, separadas por vírgulas. Não inclua caminhos nem barras finais.
 
 ---
 
@@ -331,6 +335,7 @@ npm run test:coverage
 ## 📋 Scripts Disponíveis
 
 - `npm run dev` - Inicia o servidor em modo de desenvolvimento
+- `npm start` - Inicia o servidor em modo de produção
 - `npm run migrations` - Executa as migrações do banco de dados
 - `npm run lint` - Executa o linter ESLint
 - `npm run lint:fix` - Executa o linter e corrige problemas automaticamente

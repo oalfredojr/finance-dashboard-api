@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "npm run start:dev",
+        "start": "node index.js",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",

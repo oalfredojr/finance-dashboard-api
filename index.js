@@ -8,6 +8,7 @@ import authRouter from './src/routes/auth.js'
 import { authMiddleware } from './src/middlewares/auth.js'
 import { apiLimiter } from './src/middlewares/rate-limit.js'
 import logger from './src/helpers/logger.js'
+import { createCorsOptions } from './src/helpers/cors-options.js'
 
 const app = express()
 
@@ -18,19 +19,29 @@ if (
     throw new Error('JWT_SECRET must be configured with a real value')
 }
 
+const configuredCorsOrigins = (process.env.CORS_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+
+if (
+    process.env.NODE_ENV === 'production' &&
+    configuredCorsOrigins.length === 0
+) {
+    throw new Error('CORS_ORIGINS must contain at least one allowed origin')
+}
+
+const allowedCorsOrigins = configuredCorsOrigins.length
+    ? configuredCorsOrigins
+    : ['http://localhost:5173']
+
 // Security middleware
 app.use(
     helmet({
         crossOriginResourcePolicy: false,
     }),
 )
-app.use(
-    cors({
-        origin: true,
-        credentials: true,
-        methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-    }),
-)
+app.use(cors(createCorsOptions(allowedCorsOrigins)))
 
 // Rate limiting for all API endpoints
 app.use(apiLimiter)
