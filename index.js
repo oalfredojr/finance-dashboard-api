@@ -54,9 +54,13 @@ app.use('*', (req, res) => {
 })
 
 // Error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err)
+    }
+
     logger.error('Unhandled error', { error: err?.message, stack: err?.stack })
-    res.status(500).json({ message: 'Internal server error' })
+    return res.status(500).json({ message: 'Internal server error' })
 })
 
 const PORT = process.env.PORT || 3000
